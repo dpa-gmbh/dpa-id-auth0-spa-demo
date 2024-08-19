@@ -22,19 +22,22 @@ import axios from 'axios'
 import { ref } from 'vue'
 
 const { user, isAuthenticated, getAccessTokenSilently } = useAuth0()
-const accessToken = await getAccessTokenSilently()
 const responseFromBE = ref<string>()
 
-const axiosInstance = axios.create({
-  baseURL: 'https://backend-demo.dpa-id.de/',
-  headers: {
-    'Content-type': 'application/json',
-    Authorization: `Bearer ${accessToken}`
-  }
-})
-
 const callApi = async () => {
-  const res = await axiosInstance.get('/authorization/v1/spa/hello-world')
-  responseFromBE.value = res.data
+  try {
+    const token = await getAccessTokenSilently()
+    const response = await axios.get(
+      'https://backend-demo.dpa-id.de/authorization/v1/spa/hello-world',
+      {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }
+    )
+    responseFromBE.value = response.data
+  } catch (error) {
+    console.error('API call failed:', error)
+  }
 }
 </script>
