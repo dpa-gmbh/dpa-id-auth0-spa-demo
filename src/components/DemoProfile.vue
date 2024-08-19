@@ -5,6 +5,9 @@
   >
     <div class="flex flex-col gap-6 items-center rounded-2xl bg-white p-6 shadow-default">
       <h1>Hi, {{ user?.given_name }}!</h1>
+      <h3 class="text-xl font-semibold">Your Profile</h3>
+      <p>Name: {{ user?.given_name }} {{ user?.family_name }}</p>
+      <p>Email: {{ user?.email }}</p>
       <UiButton rounded size="small" @click="callApi"
         >Call a BE endpoint using Access Token</UiButton
       >
