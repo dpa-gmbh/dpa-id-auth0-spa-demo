@@ -14,7 +14,7 @@
           class="m-1"
           :client-id="AUTH0_CLIENT_ID"
           :firstname="auth0.user.value?.name"
-          :img-url="auth0.user.value?.hasAvatar ? auth0.user.value?.image.src : undefined"
+          :img-url="auth0.user.value?.picture ? auth0.user.value?.picture : undefined"
           :initials="auth0.user.value?.initials"
           :lastname="auth0.user.value?.lastName"
           :overlay-right="'-7px'"
