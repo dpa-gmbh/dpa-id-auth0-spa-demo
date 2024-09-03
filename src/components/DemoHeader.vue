@@ -3,7 +3,7 @@
     <div class="my-6 flex w-full justify-between px-5 lg:px-32">
       <div class="flex flex-row items-center justify-start">
         <div class="flex h-6 flex-row justify-start lg:h-8">
-          <img src="../assets/dpa-id-wordmark.svg" alt="ID" class="mr-2 pr-4" />
+          <img src="../assets/dpa-id-wordmark.svg" alt="ID" class="mr-2" />
           <img src="../assets/dpa-id-logo.svg" alt="dpa-ID" />
         </div>
       </div>
