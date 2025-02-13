@@ -3,7 +3,6 @@
     <div class="my-6 flex w-full justify-between px-5 lg:px-32">
       <div class="flex flex-row items-center justify-start">
         <div class="flex h-6 flex-row justify-start lg:h-8">
-          <img src="../assets/dpa-id-wordmark.svg" alt="ID" class="mr-2" />
           <img src="../assets/dpa-id-logo.svg" alt="dpa-ID" />
         </div>
       </div>
@@ -47,6 +46,6 @@ const logoutFunction = async () => {
 </script>
 <style>
 .border-shadow {
-  box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
 }
 </style>
