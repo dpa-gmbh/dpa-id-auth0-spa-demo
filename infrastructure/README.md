@@ -1,13 +1,13 @@
 # Welcome to the auth0-spa-demo frontend CDK TypeScript project
 
-This subdirectory contains code to deploy this project - the auth0 spa demo - into the dpa id infrastructure.
+This subdirectory contains code to deploy this project - the auth0 spa demo - into the dpa-ID infrastructure.
 Note that the deployment as such is not related to building the actual docker container or to the current state of
 the actual application sources. Instead the deployment scripts are parameterized with a variables that select
 a _particular_ docker container for deployment by providing the requested image tag.
 
 Effectively this project will obtain the docker image to be deployed from the existing repository for the auth0 spa demo.
 The creator of the image must make sure that image tags created from this project will not collide with image tags
-from the dpa id frontend repository. In particular, avoid pushing the latest tag.
+from the dpa-ID frontend repository. In particular, avoid pushing the latest tag.
 
 ## Prerequisites
 
