@@ -13,7 +13,7 @@ ENV VITE_AUTH0_DOMAIN=$VITE_AUTH0_DOMAIN
 
 RUN npm run build
 
-FROM nginx:alpine
+FROM public.ecr.aws/nginx/nginx:stable-alpine
 ENV STAGE local
 
 #
