@@ -1,0 +1,17 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "rangeStrategy": "pin",
+  "schedule": ["before 4am on Monday"],
+  "extends": [
+    ":automergePatch",
+    ":automergeTypes",
+    ":dependencyDashboard",
+    ":ignoreModulesAndTests",
+    ":rebaseStalePrs",
+    "group:monorepos",
+    "group:allNonMajor",
+    "npm:unpublishSafe",
+    "replacements:all",
+    "workarounds:all"
+  ]
+}
