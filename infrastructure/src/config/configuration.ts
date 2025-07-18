@@ -1,8 +1,8 @@
-import { Duration, Environment } from 'aws-cdk-lib'
+import { Duration, Environment } from "aws-cdk-lib";
 
 export interface Configuration {
-  env: Environment
-  settings: Settings
+  env: Environment;
+  settings: Settings;
 }
 
 export interface Settings {
@@ -17,9 +17,9 @@ export interface Settings {
 }
 
 export interface DnsSettings {
-  hostedZoneId: string
-  hostedZoneName: string
-  recordName: string
+  hostedZoneId: string;
+  hostedZoneName: string;
+  recordName: string;
 }
 
 export interface ECSClusterSettings {
@@ -46,4 +46,3 @@ export interface DeploymentSettings {
     [key: string]: string;
   };
 }
-

@@ -1,5 +1,5 @@
-name: 'Release: Master'
-run-name: 'Release (on ${{ github.ref_name }})'
+name: "Release: Master"
+run-name: "Release (on ${{ github.ref_name }})"
 
 on:
   push:
