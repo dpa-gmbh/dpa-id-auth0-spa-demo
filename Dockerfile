@@ -1,4 +1,4 @@
-FROM node:gallium-alpine as build
+FROM node:23.11.1-alpine as build
 WORKDIR /usr/src/app
 COPY package.json package-lock.json ./
 RUN npm ci
@@ -32,4 +32,3 @@ ADD stageconfigs/*.conf /usr/share/nginx/stageconfigs/
 RUN envsubst '$STAGE' < /tmp/default.template > /etc/nginx/conf.d/default.conf
 COPY --from=build /usr/src/app/dist /usr/share/nginx/html
 ENTRYPOINT /usr/bin/entrypoint.sh
-

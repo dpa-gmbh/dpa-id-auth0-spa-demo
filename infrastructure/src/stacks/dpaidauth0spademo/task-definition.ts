@@ -1,5 +1,5 @@
-import { Construct } from 'constructs'
-import { IRole } from 'aws-cdk-lib/aws-iam'
+import { Construct } from "constructs";
+import { IRole } from "aws-cdk-lib/aws-iam";
 import {
   ContainerImage,
   FargateTaskDefinition,
@@ -7,58 +7,67 @@ import {
   Protocol,
   Secret as ECSSecret,
   ContainerDependencyCondition,
-} from 'aws-cdk-lib/aws-ecs'
-import {DeploymentSettings} from '../../config/configuration'
-import { LogGroup, RetentionDays } from 'aws-cdk-lib/aws-logs'
-import { RemovalPolicy } from 'aws-cdk-lib'
-import {Repository} from "aws-cdk-lib/aws-ecr";
+} from "aws-cdk-lib/aws-ecs";
+import { DeploymentSettings } from "../../config/configuration";
+import { LogGroup, RetentionDays } from "aws-cdk-lib/aws-logs";
+import { RemovalPolicy } from "aws-cdk-lib";
+import { Repository } from "aws-cdk-lib/aws-ecr";
 import { Secret } from "aws-cdk-lib/aws-secretsmanager";
 
 export interface TaskDefinitionProperties {
-  applicationRole: IRole
-  settings: DeploymentSettings
+  applicationRole: IRole;
+  settings: DeploymentSettings;
 }
 
 export class DpaIdFrontendTaskDefinition extends Construct {
-  public readonly instance: FargateTaskDefinition
+  public readonly instance: FargateTaskDefinition;
   private readonly laceworkMemoryPercentage = 10;
   private readonly memoryLimit = 512; // Default memory limit
 
   constructor(scope: Construct, id: string, props: TaskDefinitionProperties) {
-    super(scope, id)
+    super(scope, id);
 
     /**
      * Creating role for application.
      */
-    const logGroup = new LogGroup(this, 'AppLogGroup', {
+    const logGroup = new LogGroup(this, "AppLogGroup", {
       logGroupName: `/dpa-id-auth0-spa-demo/${props.settings.stageSuffix}`,
       retention: RetentionDays.SIX_MONTHS,
-      removalPolicy: RemovalPolicy.DESTROY
-    })
+      removalPolicy: RemovalPolicy.DESTROY,
+    });
 
-    this.instance = new FargateTaskDefinition(this, 'TaskDefinition', {
+    this.instance = new FargateTaskDefinition(this, "TaskDefinition", {
       taskRole: props.applicationRole,
       memoryLimitMiB: this.memoryLimit,
-    })
+    });
 
     let environment = props.settings.environment;
-    const appContainer = this.instance.addContainer('Container', {
-      image: ContainerImage.fromEcrRepository(Repository.fromRepositoryArn(this, "ecr-repo",
-          props.settings.repositoryArn), props.settings.imageTag),
+    const appContainer = this.instance.addContainer("Container", {
+      image: ContainerImage.fromEcrRepository(
+        Repository.fromRepositoryArn(
+          this,
+          "ecr-repo",
+          props.settings.repositoryArn,
+        ),
+        props.settings.imageTag,
+      ),
       portMappings: [
-        { containerPort: props.settings.applicationPort, protocol: Protocol.TCP }
+        {
+          containerPort: props.settings.applicationPort,
+          protocol: Protocol.TCP,
+        },
       ],
       environment: {
         LaceworkServerUrl: "https://agent.euprodn.lacework.net",
         LaceworkConfig: `{"memlimit":"${Math.floor(
-          (this.memoryLimit * this.laceworkMemoryPercentage) / 100
+          (this.memoryLimit * this.laceworkMemoryPercentage) / 100,
         )}M"}`,
         ...environment,
       },
       containerName: `dpa-id-auth0-spa-demo-Container-${props.settings.stageSuffix}`,
       logging: LogDriver.awsLogs({
-        streamPrefix: 'dpaidauth0spademo',
-        logGroup
+        streamPrefix: "dpaidauth0spademo",
+        logGroup,
       }),
       essential: true,
       secrets: {
@@ -66,32 +75,32 @@ export class DpaIdFrontendTaskDefinition extends Construct {
           Secret.fromSecretNameV2(
             this,
             "LaceworkAccessToken",
-            "LaceworkAccessToken"
-          )
+            "LaceworkAccessToken",
+          ),
         ),
       },
-      entryPoint: ["/var/lib/lacework-backup/lacework-sidecar.sh", "/usr/bin/entrypoint.sh"],
-    })
+      entryPoint: [
+        "/var/lib/lacework-backup/lacework-sidecar.sh",
+        "/usr/bin/entrypoint.sh",
+      ],
+    });
 
-    const laceworkContainer = this.instance.addContainer(
-      "lacework-collector",
-      {
-        containerName: `lacework-collector`,
-        image: ContainerImage.fromEcrRepository(
-          Repository.fromRepositoryArn(
-            this,
-            "LaceworkRepositoy",
-            "arn:aws:ecr:eu-central-1:478324715856:repository/lacework/datacollector"
-          ),
-          "latest-sidecar"
+    const laceworkContainer = this.instance.addContainer("lacework-collector", {
+      containerName: `lacework-collector`,
+      image: ContainerImage.fromEcrRepository(
+        Repository.fromRepositoryArn(
+          this,
+          "LaceworkRepositoy",
+          "arn:aws:ecr:eu-central-1:478324715856:repository/lacework/datacollector",
         ),
-        logging: LogDriver.awsLogs({
-          streamPrefix: `lacework-collector`,
-          logRetention: RetentionDays.ONE_MONTH,
-        }),
-        essential: false,
-      }
-    );
+        "latest-sidecar",
+      ),
+      logging: LogDriver.awsLogs({
+        streamPrefix: `lacework-collector`,
+        logRetention: RetentionDays.ONE_MONTH,
+      }),
+      essential: false,
+    });
 
     appContainer.addVolumesFrom({
       readOnly: true,

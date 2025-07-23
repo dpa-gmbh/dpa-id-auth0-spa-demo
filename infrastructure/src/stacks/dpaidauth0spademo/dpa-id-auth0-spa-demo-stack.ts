@@ -1,88 +1,95 @@
-import { Construct } from 'constructs'
+import { Construct } from "constructs";
 
-import { Duration, Stack, StackProps } from 'aws-cdk-lib'
-import {ISecurityGroup, IVpc, SecurityGroup, Vpc} from 'aws-cdk-lib/aws-ec2'
-import {DpaIdAuth0SpaDemoDnsRecord} from './dns-record'
-import { Settings } from '../../config/configuration'
-import { HostedZone } from 'aws-cdk-lib/aws-route53'
-import { DpaIdAuth0SpaDemoRole } from './role'
-import { DpaIdFrontendTaskDefinition } from './task-definition'
-import { DpaIdAuth0SpaDemoService } from './service'
+import { Duration, Stack, StackProps } from "aws-cdk-lib";
+import { ISecurityGroup, IVpc, SecurityGroup, Vpc } from "aws-cdk-lib/aws-ec2";
+import { DpaIdAuth0SpaDemoDnsRecord } from "./dns-record";
+import { Settings } from "../../config/configuration";
+import { HostedZone } from "aws-cdk-lib/aws-route53";
+import { DpaIdAuth0SpaDemoRole } from "./role";
+import { DpaIdFrontendTaskDefinition } from "./task-definition";
+import { DpaIdAuth0SpaDemoService } from "./service";
 import {
-  ApplicationListener, ApplicationLoadBalancer,
+  ApplicationListener,
+  ApplicationLoadBalancer,
   ApplicationProtocol,
-  ApplicationTargetGroup, IApplicationListener, ILoadBalancerV2, ListenerCondition,
-  TargetType
-} from 'aws-cdk-lib/aws-elasticloadbalancingv2'
-import {Cluster, ICluster} from "aws-cdk-lib/aws-ecs";
+  ApplicationTargetGroup,
+  IApplicationListener,
+  ILoadBalancerV2,
+  ListenerCondition,
+  TargetType,
+} from "aws-cdk-lib/aws-elasticloadbalancingv2";
+import { Cluster, ICluster } from "aws-cdk-lib/aws-ecs";
 
 export interface DpaIdAuth0SpaDemoProperties extends StackProps {
-  settings: Settings
+  settings: Settings;
 }
 
 export class DpaIdAuth0SpaDemoStack extends Stack {
-  private readonly dnsRecord: DpaIdAuth0SpaDemoDnsRecord
+  private readonly dnsRecord: DpaIdAuth0SpaDemoDnsRecord;
 
-  constructor(scope: Construct, id: string, props: DpaIdAuth0SpaDemoProperties) {
-    super(scope, id, props)
-    const { settings } = props
+  constructor(
+    scope: Construct,
+    id: string,
+    props: DpaIdAuth0SpaDemoProperties,
+  ) {
+    super(scope, id, props);
+    const { settings } = props;
     const { deploymentSettings } = settings;
 
     const hostedZone = HostedZone.fromHostedZoneAttributes(
       this,
-      'DpaIdFrontendHostedZone',
+      "DpaIdFrontendHostedZone",
       {
         hostedZoneId: settings.dnsSettings.hostedZoneId,
-        zoneName: settings.dnsSettings.hostedZoneName
-      }
-    )
+        zoneName: settings.dnsSettings.hostedZoneName,
+      },
+    );
     const recordName = settings.dnsSettings.recordName;
     const vpc = this.lookupVPC(settings.vpc.name);
 
-    const applicationRole = new DpaIdAuth0SpaDemoRole(this)
+    const applicationRole = new DpaIdAuth0SpaDemoRole(this);
 
     const taskdefinition = new DpaIdFrontendTaskDefinition(
       this,
-      'ApplicationTaskDefinition',
+      "ApplicationTaskDefinition",
       {
         applicationRole: applicationRole.instance,
-        settings: deploymentSettings
-      }
-    )
+        settings: deploymentSettings,
+      },
+    );
     const loadBalancerSecurityGroup = this.lookupLBSecurityGroup(
-        settings.loadbalancerSettings.securityGroupId
+      settings.loadbalancerSettings.securityGroupId,
     );
     const loadBalancer = this.lookupLB(
-        loadBalancerSecurityGroup,
-        vpc,
-        settings.loadbalancerSettings.loadbalancerArn,
-        settings.loadbalancerSettings.loadbalancerCanonicalHostedZoneId,
-        settings.loadbalancerSettings.loadbalancerDnsName
+      loadBalancerSecurityGroup,
+      vpc,
+      settings.loadbalancerSettings.loadbalancerArn,
+      settings.loadbalancerSettings.loadbalancerCanonicalHostedZoneId,
+      settings.loadbalancerSettings.loadbalancerDnsName,
     );
     const loadBalancerListener = this.lookupLBListener(
-        loadBalancerSecurityGroup,
-        settings.loadbalancerSettings.loadbalancerListenerArn
+      loadBalancerSecurityGroup,
+      settings.loadbalancerSettings.loadbalancerListenerArn,
     );
     const cluster = this.lookupCluster(
-        vpc,
-        settings.ecsClusterSettings.arn,
-        settings.ecsClusterSettings.name
+      vpc,
+      settings.ecsClusterSettings.arn,
+      settings.ecsClusterSettings.name,
     );
-
 
     this.dnsRecord = new DpaIdAuth0SpaDemoDnsRecord(this, {
       loadBalancer: loadBalancer,
       recordName,
-      zone: hostedZone
-    })
+      zone: hostedZone,
+    });
     const service = new DpaIdAuth0SpaDemoService(this, {
       vpc,
       taskDefinition: taskdefinition.instance,
       cluster: cluster,
-      stackSuffix: deploymentSettings.stageSuffix
-    })
+      stackSuffix: deploymentSettings.stageSuffix,
+    });
 
-    const targetGroup = new ApplicationTargetGroup(this, 'AppTargetGroup', {
+    const targetGroup = new ApplicationTargetGroup(this, "AppTargetGroup", {
       vpc,
       targetType: TargetType.IP,
       protocol: ApplicationProtocol.HTTP,
@@ -93,10 +100,10 @@ export class DpaIdAuth0SpaDemoStack extends Stack {
         unhealthyThresholdCount: 3,
         healthyThresholdCount: 3,
         interval: Duration.seconds(30),
-      }
-    })
+      },
+    });
 
-    service.attachToApplicationTargetGroup(targetGroup)
+    service.attachToApplicationTargetGroup(targetGroup);
 
     loadBalancerListener.addTargetGroups("TargetGroup", {
       priority: settings.deploymentSettings.lbPriority,
@@ -105,9 +112,9 @@ export class DpaIdAuth0SpaDemoStack extends Stack {
     });
   }
   private lookupCluster(
-      vpc: IVpc,
-      clusterArn: string,
-      clusterName: string
+    vpc: IVpc,
+    clusterArn: string,
+    clusterName: string,
   ): ICluster {
     return Cluster.fromClusterAttributes(this, "DpaIdAuth0SpaDemoCluster", {
       clusterArn,
@@ -123,44 +130,44 @@ export class DpaIdAuth0SpaDemoStack extends Stack {
 
   private lookupLBSecurityGroup(securityGroupId: string): ISecurityGroup {
     return SecurityGroup.fromSecurityGroupId(
-        this,
-        "DpaIdAuth0SpaDemoLoadbalancerSecurityGroup",
-        securityGroupId
+      this,
+      "DpaIdAuth0SpaDemoLoadbalancerSecurityGroup",
+      securityGroupId,
     );
   }
 
   private lookupLB(
-      securityGroup: ISecurityGroup,
-      vpc: IVpc,
-      loadBalancerArn: string,
-      loadBalancerCanonicalHostedZoneId: string,
-      loadBalancerDnsName: string
+    securityGroup: ISecurityGroup,
+    vpc: IVpc,
+    loadBalancerArn: string,
+    loadBalancerCanonicalHostedZoneId: string,
+    loadBalancerDnsName: string,
   ): ILoadBalancerV2 {
     const { securityGroupId } = securityGroup;
     return ApplicationLoadBalancer.fromApplicationLoadBalancerAttributes(
-        this,
-        "DpaIdAuth0SpaDemo-LB",
-        {
-          loadBalancerArn,
-          loadBalancerCanonicalHostedZoneId,
-          loadBalancerDnsName,
-          securityGroupId,
-          vpc,
-        }
+      this,
+      "DpaIdAuth0SpaDemo-LB",
+      {
+        loadBalancerArn,
+        loadBalancerCanonicalHostedZoneId,
+        loadBalancerDnsName,
+        securityGroupId,
+        vpc,
+      },
     );
   }
 
   private lookupLBListener(
-      securityGroup: ISecurityGroup,
-      listenerArn: string
+    securityGroup: ISecurityGroup,
+    listenerArn: string,
   ): IApplicationListener {
     return ApplicationListener.fromApplicationListenerAttributes(
-        this,
-        "dpa-id-auth0-spa-demo-HTTPs-Listener",
-        {
-          listenerArn,
-          securityGroup,
-        }
+      this,
+      "dpa-id-auth0-spa-demo-HTTPs-Listener",
+      {
+        listenerArn,
+        securityGroup,
+      },
     );
   }
 }
