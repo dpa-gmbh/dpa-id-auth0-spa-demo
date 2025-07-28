@@ -22,12 +22,12 @@
   },
   "dependencies": {
     "@auth0/auth0-vue": "2.4.0",
-    "@dpa-id-components/dpa-shared-components": "16.0.0",
+    "@dpa-id-components/dpa-shared-components": "16.0.1",
     "@dpa-it/dpa-id-partner-components-vue": "3.0.14",
     "@vitejs/plugin-basic-ssl": "1.2.0",
     "axios": "1.10.0",
     "vitest": "1.6.1",
-    "vue": "3.5.17",
+    "vue": "3.5.18",
     "vue-router": "4.5.1"
   },
   "devDependencies": {
