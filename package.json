@@ -25,7 +25,7 @@
     "@dpa-id-components/dpa-shared-components": "16.0.1",
     "@dpa-it/dpa-id-partner-components-vue": "3.0.14",
     "@vitejs/plugin-basic-ssl": "1.2.0",
-    "axios": "1.10.0",
+    "axios": "1.11.0",
     "vitest": "1.6.1",
     "vue": "3.5.18",
     "vue-router": "4.5.1"
