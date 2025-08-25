@@ -10,7 +10,7 @@
     "cdk": "cdk"
   },
   "devDependencies": {
-    "@types/node": "22.17.1",
+    "@types/node": "22.17.2",
     "aws-cdk": "2.1025.0",
     "aws-cdk-lib": "2.211.0",
     "constructs": "10.4.2",
