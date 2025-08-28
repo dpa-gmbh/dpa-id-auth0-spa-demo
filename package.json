@@ -23,7 +23,7 @@
   "dependencies": {
     "@auth0/auth0-vue": "2.4.0",
     "@dpa-id-components/dpa-shared-components": "17.0.4",
-    "@dpa-it/dpa-id-partner-components-vue": "4.5.2",
+    "@dpa-it/dpa-id-partner-components-vue": "4.5.3",
     "axios": "1.11.0",
     "vue": "3.5.20",
     "vue-router": "4.5.1"
@@ -31,10 +31,9 @@
   "devDependencies": {
     "@tsconfig/node22": "22.0.2",
     "@types/jsdom": "21.1.7",
-    "@types/node": "22.18.0",
+    "@types/node": "24.3.0",
     "@vitejs/plugin-basic-ssl": "2.1.0",
     "@vitejs/plugin-vue": "6.0.1",
-    "@vitejs/plugin-vue-jsx": "5.0.1",
     "@vue/test-utils": "2.4.6",
     "@vue/tsconfig": "0.8.1",
     "autoprefixer": "10.4.21",
