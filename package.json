@@ -25,7 +25,7 @@
     "@dpa-id-components/dpa-shared-components": "17.0.4",
     "@dpa-it/dpa-id-partner-components-vue": "4.5.2",
     "axios": "1.11.0",
-    "vue": "3.5.19",
+    "vue": "3.5.20",
     "vue-router": "4.5.1"
   },
   "devDependencies": {
