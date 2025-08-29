@@ -7,4 +7,12 @@ export default [
   },
   globalIgnores(["**/dist/", "**/coverage/", "**/infrastructure/"]),
   ...sharedConfig,
+  { settings: {
+      "better-tailwindcss": {
+        // The CSS entry point has to be manually configured in each host project.
+        entryPoint: "src/assets/main.css",
+      },
+    },
+  }
+  
 ];
