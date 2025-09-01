@@ -1,3 +1,2 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "@dpa-id-components/dpa-shared-components/tailwindPreset";
+@import "@dpa-id-components/dpa-shared-components/style";

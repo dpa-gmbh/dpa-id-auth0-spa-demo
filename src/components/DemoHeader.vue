@@ -37,11 +37,11 @@
 </template>
 
 <script lang="ts" setup>
+import { useAuth0 } from "@auth0/auth0-vue";
 import {
   DpaIdAppswitcher,
   DpaIdUsericon,
 } from "@dpa-it/dpa-id-partner-components-vue";
-import { useAuth0 } from "@auth0/auth0-vue";
 import { computed } from "vue";
 
 const AUTH0_CLIENT_ID = import.meta.env.VITE_AUTH0_CLIENT_ID;
@@ -55,7 +55,7 @@ const logoutFunction = async () => {
   await auth0.logout({ logoutParams: { returnTo: window.location.origin } });
 };
 </script>
-<style>
+<style scoped>
 .border-shadow {
   box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
 }
