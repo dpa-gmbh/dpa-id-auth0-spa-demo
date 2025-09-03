@@ -1,7 +1,7 @@
-import { Construct } from "constructs";
 import { ILoadBalancerV2 } from "aws-cdk-lib/aws-elasticloadbalancingv2";
 import { ARecord, IHostedZone, RecordTarget } from "aws-cdk-lib/aws-route53";
 import { LoadBalancerTarget } from "aws-cdk-lib/aws-route53-targets";
+import { Construct } from "constructs";
 
 export interface DpaIdAuth0SpaDemoDnsRecordProperties {
   zone: IHostedZone;

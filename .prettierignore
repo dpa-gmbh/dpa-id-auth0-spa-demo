@@ -1,1 +1,3 @@
+infrastructure/**/*.js
+infrastructure/**/*.d.ts
 *.md

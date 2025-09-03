@@ -1,5 +1,5 @@
-import { Master } from "./stages/master";
 import { Configuration } from "./configuration";
+import { Master } from "./stages/master";
 
 export class ConfigManager {
   static createConfig(stage: string): Configuration {

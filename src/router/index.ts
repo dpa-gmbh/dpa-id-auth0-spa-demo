@@ -1,6 +1,6 @@
-import { createRouter, createWebHistory } from "vue-router";
 import { createAuthGuard } from "@auth0/auth0-vue";
 import type { App } from "vue";
+import { createRouter, createWebHistory } from "vue-router";
 
 const router = (app: App) =>
   createRouter({

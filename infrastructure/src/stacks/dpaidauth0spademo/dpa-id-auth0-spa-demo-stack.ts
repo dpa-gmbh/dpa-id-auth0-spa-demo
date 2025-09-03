@@ -1,13 +1,6 @@
-import { Construct } from "constructs";
-
 import { Duration, Stack, StackProps } from "aws-cdk-lib";
 import { ISecurityGroup, IVpc, SecurityGroup, Vpc } from "aws-cdk-lib/aws-ec2";
-import { DpaIdAuth0SpaDemoDnsRecord } from "./dns-record";
-import { Settings } from "../../config/configuration";
-import { HostedZone } from "aws-cdk-lib/aws-route53";
-import { DpaIdAuth0SpaDemoRole } from "./role";
-import { DpaIdFrontendTaskDefinition } from "./task-definition";
-import { DpaIdAuth0SpaDemoService } from "./service";
+import { Cluster, ICluster } from "aws-cdk-lib/aws-ecs";
 import {
   ApplicationListener,
   ApplicationLoadBalancer,
@@ -18,7 +11,14 @@ import {
   ListenerCondition,
   TargetType,
 } from "aws-cdk-lib/aws-elasticloadbalancingv2";
-import { Cluster, ICluster } from "aws-cdk-lib/aws-ecs";
+import { HostedZone } from "aws-cdk-lib/aws-route53";
+import { Construct } from "constructs";
+
+import { Settings } from "../../config/configuration";
+import { DpaIdAuth0SpaDemoDnsRecord } from "./dns-record";
+import { DpaIdAuth0SpaDemoRole } from "./role";
+import { DpaIdAuth0SpaDemoService } from "./service";
+import { DpaIdFrontendTaskDefinition } from "./task-definition";
 
 export interface DpaIdAuth0SpaDemoProperties extends StackProps {
   settings: Settings;
