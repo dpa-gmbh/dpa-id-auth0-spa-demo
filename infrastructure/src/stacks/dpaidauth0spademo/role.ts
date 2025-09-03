@@ -1,4 +1,4 @@
-import { Construct } from "constructs";
+import { Stack } from "aws-cdk-lib";
 import {
   Effect,
   IRole,
@@ -6,7 +6,7 @@ import {
   Role,
   ServicePrincipal,
 } from "aws-cdk-lib/aws-iam";
-import { Stack } from "aws-cdk-lib";
+import { Construct } from "constructs";
 
 export class DpaIdAuth0SpaDemoRole {
   public readonly instance: IRole;

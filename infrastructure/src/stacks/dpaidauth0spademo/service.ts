@@ -1,12 +1,12 @@
-import { Construct } from "constructs";
+import { IVpc, SubnetType } from "aws-cdk-lib/aws-ec2";
 import {
   BaseService,
   FargateService,
   ICluster,
   TaskDefinition,
 } from "aws-cdk-lib/aws-ecs";
-import { IVpc, SubnetType } from "aws-cdk-lib/aws-ec2";
 import { IApplicationTargetGroup } from "aws-cdk-lib/aws-elasticloadbalancingv2";
+import { Construct } from "constructs";
 
 export interface DpaIdAuth0SpaDemoServiceProperties {
   cluster: ICluster;

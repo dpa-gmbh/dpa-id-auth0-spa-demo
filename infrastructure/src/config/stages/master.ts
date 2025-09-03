@@ -1,10 +1,11 @@
+import { Duration } from "aws-cdk-lib";
+
 import {
   Configuration,
   DeploymentSettings,
   DnsSettings,
   Settings,
 } from "../configuration";
-import { Duration } from "aws-cdk-lib";
 
 export class Master implements Configuration {
   public static readonly STAGE = "master";

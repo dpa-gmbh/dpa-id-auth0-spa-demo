@@ -1,13 +1,16 @@
 #!/usr/bin/env node
 import "source-map-support/register";
+
 import * as cdk from "aws-cdk-lib";
-import { Configuration } from "../src/config/configuration";
+
 import { ConfigManager } from "../src/config/config-manager";
+import { Configuration } from "../src/config/configuration";
 import { DpaIdAuth0SpaDemoStack } from "../src/stacks/dpaidauth0spademo/dpa-id-auth0-spa-demo-stack";
 
 const app = new cdk.App();
 
 const stage = process.env.STAGE || null;
+// eslint-disable-next-line no-console
 console.log("STAGE : " + stage);
 if (!stage) throw new Error("STAGE is not set");
 

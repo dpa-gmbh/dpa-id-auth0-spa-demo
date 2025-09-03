@@ -1,18 +1,19 @@
-import { Construct } from "constructs";
-import { IRole } from "aws-cdk-lib/aws-iam";
+import { RemovalPolicy } from "aws-cdk-lib";
+import { Repository } from "aws-cdk-lib/aws-ecr";
 import {
+  ContainerDependencyCondition,
   ContainerImage,
   FargateTaskDefinition,
   LogDriver,
   Protocol,
   Secret as ECSSecret,
-  ContainerDependencyCondition,
 } from "aws-cdk-lib/aws-ecs";
-import { DeploymentSettings } from "../../config/configuration";
+import { IRole } from "aws-cdk-lib/aws-iam";
 import { LogGroup, RetentionDays } from "aws-cdk-lib/aws-logs";
-import { RemovalPolicy } from "aws-cdk-lib";
-import { Repository } from "aws-cdk-lib/aws-ecr";
 import { Secret } from "aws-cdk-lib/aws-secretsmanager";
+import { Construct } from "constructs";
+
+import { DeploymentSettings } from "../../config/configuration";
 
 export interface TaskDefinitionProperties {
   applicationRole: IRole;
@@ -41,7 +42,7 @@ export class DpaIdFrontendTaskDefinition extends Construct {
       memoryLimitMiB: this.memoryLimit,
     });
 
-    let environment = props.settings.environment;
+    const environment = props.settings.environment;
     const appContainer = this.instance.addContainer("Container", {
       image: ContainerImage.fromEcrRepository(
         Repository.fromRepositoryArn(
