@@ -1,2 +1,4 @@
 @import "@dpa-id-components/dpa-shared-components/tailwindPreset";
 @import "@dpa-id-components/dpa-shared-components/style";
+
+@source "../../node_modules/@dpa-id-components/dpa-shared-components/**/*.js";
