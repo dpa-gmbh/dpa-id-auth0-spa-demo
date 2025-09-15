@@ -22,7 +22,7 @@
   },
   "dependencies": {
     "@auth0/auth0-vue": "2.4.0",
-    "@dpa-id-components/dpa-shared-components": "18.0.1",
+    "@dpa-id-components/dpa-shared-components": "18.0.4",
     "@dpa-it/dpa-id-partner-components-vue": "4.5.3",
     "@tailwindcss/typography": "0.5.16",
     "axios": "1.11.0",
