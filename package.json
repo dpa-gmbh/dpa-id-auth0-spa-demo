@@ -39,7 +39,7 @@
     "@vitejs/plugin-vue": "6.0.1",
     "@vue/test-utils": "2.4.6",
     "@vue/tsconfig": "0.8.1",
-    "eslint": "9.34.0",
+    "eslint": "9.35.0",
     "eslint-plugin-simple-import-sort": "12.1.1",
     "jsdom": "26.1.0",
     "npm-run-all2": "8.0.4",
