@@ -18,7 +18,7 @@
     "fix:format": "prettier --write ."
   },
   "engines": {
-    "node": "24.9.0"
+    "node": "24.10.0"
   },
   "dependencies": {
     "@auth0/auth0-vue": "2.4.0",
@@ -34,12 +34,12 @@
     "@tailwindcss/vite": "4.1.14",
     "@tsconfig/node24": "24.0.1",
     "@types/jsdom": "27.0.0",
-    "@types/node": "24.5.2",
+    "@types/node": "24.7.1",
     "@vitejs/plugin-basic-ssl": "2.1.0",
     "@vitejs/plugin-vue": "6.0.1",
     "@vue/test-utils": "2.4.6",
     "@vue/tsconfig": "0.8.1",
-    "eslint": "9.36.0",
+    "eslint": "9.37.0",
     "eslint-plugin-simple-import-sort": "12.1.1",
     "jsdom": "27.0.0",
     "npm-run-all2": "8.0.4",
@@ -47,6 +47,6 @@
     "typescript": "5.9.3",
     "vite": "7.1.9",
     "vitest": "3.2.4",
-    "vue-tsc": "3.0.9"
+    "vue-tsc": "3.1.1"
   }
 }
