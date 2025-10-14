@@ -10,7 +10,7 @@
     ":rebaseStalePrs",
     "group:monorepos",
     "group:allNonMajor",
-    "npm:unpublishSafe",
+    "security:minimumReleaseAgeNpm",
     "replacements:all",
     "workarounds:all"
   ]
