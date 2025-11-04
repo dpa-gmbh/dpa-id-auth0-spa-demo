@@ -18,14 +18,14 @@
     "fix:format": "prettier --write ."
   },
   "engines": {
-    "node": "24.10.0"
+    "node": "24.11.0"
   },
   "dependencies": {
     "@auth0/auth0-vue": "2.4.0",
     "@dpa-id-components/dpa-shared-components": "18.3.0",
     "@dpa-it/dpa-id-partner-components-vue": "4.5.3",
     "@tailwindcss/typography": "0.5.19",
-    "axios": "1.12.2",
+    "axios": "1.13.1",
     "tailwindcss": "4.1.16",
     "vue": "3.5.22",
     "vue-router": "4.6.3"
@@ -34,14 +34,14 @@
     "@tailwindcss/vite": "4.1.16",
     "@tsconfig/node24": "24.0.1",
     "@types/jsdom": "27.0.0",
-    "@types/node": "24.8.1",
+    "@types/node": "24.9.2",
     "@vitejs/plugin-basic-ssl": "2.1.0",
     "@vitejs/plugin-vue": "6.0.1",
     "@vue/test-utils": "2.4.6",
     "@vue/tsconfig": "0.8.1",
-    "eslint": "9.37.0",
+    "eslint": "9.39.0",
     "eslint-plugin-simple-import-sort": "12.1.1",
-    "jsdom": "27.0.1",
+    "jsdom": "27.1.0",
     "npm-run-all2": "8.0.4",
     "prettier": "3.6.2",
     "typescript": "5.9.3",
