@@ -25,13 +25,13 @@
     "@dpa-id-components/dpa-shared-components": "18.3.0",
     "@dpa-it/dpa-id-partner-components-vue": "4.5.3",
     "@tailwindcss/typography": "0.5.19",
-    "axios": "1.13.1",
-    "tailwindcss": "4.1.16",
-    "vue": "3.5.22",
+    "axios": "1.13.2",
+    "tailwindcss": "4.1.17",
+    "vue": "3.5.23",
     "vue-router": "4.6.3"
   },
   "devDependencies": {
-    "@tailwindcss/vite": "4.1.16",
+    "@tailwindcss/vite": "4.1.17",
     "@tsconfig/node24": "24.0.1",
     "@types/jsdom": "27.0.0",
     "@types/node": "24.9.2",
@@ -39,7 +39,7 @@
     "@vitejs/plugin-vue": "6.0.1",
     "@vue/test-utils": "2.4.6",
     "@vue/tsconfig": "0.8.1",
-    "eslint": "9.39.0",
+    "eslint": "9.39.1",
     "eslint-plugin-simple-import-sort": "12.1.1",
     "jsdom": "27.1.0",
     "npm-run-all2": "8.0.4",
@@ -47,6 +47,6 @@
     "typescript": "5.9.3",
     "vite": "7.1.12",
     "vitest": "3.2.4",
-    "vue-tsc": "3.1.2"
+    "vue-tsc": "3.1.3"
   }
 }
