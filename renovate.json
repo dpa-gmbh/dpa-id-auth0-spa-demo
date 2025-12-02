@@ -3,8 +3,6 @@
   "rangeStrategy": "pin",
   "schedule": ["before 4am on Monday"],
   "extends": [
-    ":automergePatch",
-    ":automergeTypes",
     ":dependencyDashboard",
     ":ignoreModulesAndTests",
     ":rebaseStalePrs",
@@ -13,5 +11,9 @@
     "security:minimumReleaseAgeNpm",
     "replacements:all",
     "workarounds:all"
-  ]
+  ],
+  "npm": {
+    "minimumReleaseAge": "7 days",
+    "internalChecksFilter": "strict"
+  }
 }
