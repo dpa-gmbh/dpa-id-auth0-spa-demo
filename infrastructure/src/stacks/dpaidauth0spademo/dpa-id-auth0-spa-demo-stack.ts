@@ -14,17 +14,19 @@ import {
 import { HostedZone } from "aws-cdk-lib/aws-route53";
 import { Construct } from "constructs";
 
-import { Settings } from "../../config/configuration";
-import { DpaIdAuth0SpaDemoDnsRecord } from "./dns-record";
-import { DpaIdAuth0SpaDemoRole } from "./role";
-import { DpaIdAuth0SpaDemoService } from "./service";
-import { DpaIdFrontendTaskDefinition } from "./task-definition";
+import { Settings } from "../../config/configuration.ts";
+
+import { DpaIdAuth0SpaDemoDnsRecord } from "./dns-record.ts";
+import { DpaIdAuth0SpaDemoRole } from "./role.ts";
+import { DpaIdAuth0SpaDemoService } from "./service.ts";
+import { DpaIdFrontendTaskDefinition } from "./task-definition.ts";
 
 export interface DpaIdAuth0SpaDemoProperties extends StackProps {
   settings: Settings;
 }
 
 export class DpaIdAuth0SpaDemoStack extends Stack {
+  // @ts-expect-error unused member
   private readonly dnsRecord: DpaIdAuth0SpaDemoDnsRecord;
 
   constructor(

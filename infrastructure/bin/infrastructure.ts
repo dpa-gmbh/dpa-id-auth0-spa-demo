@@ -1,11 +1,10 @@
-#!/usr/bin/env node
 import "source-map-support/register";
 
 import * as cdk from "aws-cdk-lib";
 
-import { ConfigManager } from "../src/config/config-manager";
-import { Configuration } from "../src/config/configuration";
-import { DpaIdAuth0SpaDemoStack } from "../src/stacks/dpaidauth0spademo/dpa-id-auth0-spa-demo-stack";
+import { ConfigManager } from "../src/config/config-manager.ts";
+import { Configuration } from "../src/config/configuration.ts";
+import { DpaIdAuth0SpaDemoStack } from "../src/stacks/dpaidauth0spademo/dpa-id-auth0-spa-demo-stack.ts";
 
 const app = new cdk.App();
 
@@ -16,8 +15,7 @@ if (!stage) throw new Error("STAGE is not set");
 
 const config: Configuration = ConfigManager.createConfig(stage);
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const dpaIdAuth0SpaDemoStack = new DpaIdAuth0SpaDemoStack(
+new DpaIdAuth0SpaDemoStack(
   app,
   "dpa-id-auth0-spa-demo-" + config.settings.deploymentSettings.stageSuffix,
   {

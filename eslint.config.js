@@ -1,10 +1,9 @@
 import sharedConfig from "@dpa-id-components/dpa-shared-components/eslintConfig";
 import { globalIgnores } from "eslint/config";
-import simpleImportSort from "eslint-plugin-simple-import-sort";
 
 export default [
   {
-    files: ["**/*.ts", "**/*.mts", "**/*.vue"],
+    files: ["**/*.{ts,vue}"],
   },
   globalIgnores([
     "**/dist/",
@@ -13,9 +12,6 @@ export default [
   ]),
   ...sharedConfig,
   {
-    plugins: {
-      "simple-import-sort": simpleImportSort,
-    },
     settings: {
       "better-tailwindcss": {
         // The CSS entry point has to be manually configured in each host project.
@@ -23,8 +19,6 @@ export default [
       },
     },
     rules: {
-      "simple-import-sort/imports": "error",
-      "simple-import-sort/exports": "error",
       "vue/no-undef-components": [
         "error",
         {
