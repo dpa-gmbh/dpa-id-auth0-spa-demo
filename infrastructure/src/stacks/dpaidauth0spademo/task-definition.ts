@@ -13,7 +13,7 @@ import { LogGroup, RetentionDays } from "aws-cdk-lib/aws-logs";
 import { Secret } from "aws-cdk-lib/aws-secretsmanager";
 import { Construct } from "constructs";
 
-import { DeploymentSettings } from "../../config/configuration";
+import { DeploymentSettings } from "../../config/configuration.ts";
 
 export interface TaskDefinitionProperties {
   applicationRole: IRole;

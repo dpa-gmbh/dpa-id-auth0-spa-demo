@@ -5,7 +5,7 @@ import {
   DeploymentSettings,
   DnsSettings,
   Settings,
-} from "../configuration";
+} from "../configuration.ts";
 
 export class Master implements Configuration {
   public static readonly STAGE = "master";

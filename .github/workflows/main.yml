@@ -34,5 +34,7 @@ jobs:
           node-version-file: ".nvmrc"
           cache: "npm"
       - run: npm clean-install
+      - working-directory: ./infrastructure
+        run: npm clean-install
       - run: npm run lint
       - run: npm run build
