@@ -20,7 +20,7 @@ jobs:
     permissions:
       contents: read # needed for actions/checkout
     steps:
-      - uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6.0.0
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
       - uses: aws-actions/configure-aws-credentials@61815dcd50bd041e203e49132bacad1fd04d2708 # v5.1.1
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID_DPA_ID }}
@@ -31,7 +31,7 @@ jobs:
           parameterPairs: |
             /config/dpa-id-auth0-spa-demo/auth0ClientId = VITE_AUTH0_CLIENT_ID,
             /config/dpa-id-auth0-spa-demo/auth0Domain = VITE_AUTH0_DOMAIN
-      - uses: aws-actions/amazon-ecr-login@062b18b96a7aff071d4dc91bc00c4c1a7945b076 # v2.0.1
+      - uses: aws-actions/amazon-ecr-login@f2e9fc6c2b355c1890b65e6f6f0e2ac3e6e22f78 # v2.1.2
       - run: |
           docker build -t ${{ env.IMAGE }}:${{ env.IMAGE_TAG }} \
             --build-arg VITE_AUTH0_DOMAIN="${{ env.VITE_AUTH0_DOMAIN }}" \
@@ -45,7 +45,7 @@ jobs:
     env:
       STAGE: master
     steps:
-      - uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6.0.0
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
       - uses: aws-actions/configure-aws-credentials@61815dcd50bd041e203e49132bacad1fd04d2708 # v5.1.1
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID_DPA_ID }}
