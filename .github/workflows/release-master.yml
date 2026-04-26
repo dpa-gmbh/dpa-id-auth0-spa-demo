@@ -31,7 +31,7 @@ jobs:
           parameterPairs: |
             /config/dpa-id-auth0-spa-demo/auth0ClientId = VITE_AUTH0_CLIENT_ID,
             /config/dpa-id-auth0-spa-demo/auth0Domain = VITE_AUTH0_DOMAIN
-      - uses: aws-actions/amazon-ecr-login@f2e9fc6c2b355c1890b65e6f6f0e2ac3e6e22f78 # v2.1.2
+      - uses: aws-actions/amazon-ecr-login@19d944daaa35f0fa1d3f7f8af1d3f2e5de25c5b7 # v2.1.4
       - run: |
           docker build -t ${{ env.IMAGE }}:${{ env.IMAGE_TAG }} \
             --build-arg VITE_AUTH0_DOMAIN="${{ env.VITE_AUTH0_DOMAIN }}" \
