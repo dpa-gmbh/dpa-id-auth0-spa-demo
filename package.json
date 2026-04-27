@@ -17,9 +17,13 @@
     "fix:code-quality": "eslint --fix",
     "fix:format": "prettier --write ."
   },
-  "engines": {
-    "node": "24.15.0"
+  "devEngines": {
+    "runtime": {
+      "name": "node",
+      "version": "^24.15.0"
+    }
   },
+  "packageManager": "pnpm@10.33.2",
   "dependencies": {
     "@auth0/auth0-vue": "2.5.0",
     "@dpa-id-components/dpa-shared-components": "21.0.3",
