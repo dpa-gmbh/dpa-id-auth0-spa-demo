@@ -1,3 +1,4 @@
 infrastructure/**/*.js
 infrastructure/**/*.d.ts
 *.md
+pnpm-lock.yaml

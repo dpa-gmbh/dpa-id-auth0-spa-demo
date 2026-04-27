@@ -13,7 +13,7 @@ from the dpa-ID frontend repository. In particular, avoid pushing the latest tag
 
 To execute this script locally you need to have cdk installed.
 
-``npm install -g aws-cdk``
+``pnpm install -g aws-cdk``
 
 Also make sure that your exposed AWS identity is capable of performing the
 required administrative actions, e.g.
@@ -63,8 +63,8 @@ Note that you will need to supply the environment variables as shown above.
 
 ## Basic cdk related commands
 
-* `npm run build`   compile typescript to js
-* `npm run watch`   watch for changes and compile
+* `pnpm run build`   compile typescript to js
+* `pnpm run watch`   watch for changes and compile
 * `cdk deploy`      deploy this stack to your default AWS account/region
 * `cdk diff`        compare deployed stack with current state
 * `cdk synth`       emits the synthesized CloudFormation template

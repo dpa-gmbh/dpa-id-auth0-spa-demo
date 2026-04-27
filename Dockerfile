@@ -1,7 +1,7 @@
 FROM node:24.15.0-alpine as build
 WORKDIR /usr/src/app
-COPY package.json package-lock.json ./
-RUN npm ci
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
+RUN pnpm install --frozen-lockfile
 COPY . ./
 
 
@@ -11,7 +11,7 @@ ENV VITE_AUTH0_CLIENT_ID=$VITE_AUTH0_CLIENT_ID
 ARG VITE_AUTH0_DOMAIN
 ENV VITE_AUTH0_DOMAIN=$VITE_AUTH0_DOMAIN
 
-RUN npm run build
+RUN pnpm run build
 
 FROM public.ecr.aws/nginx/nginx:stable-alpine
 ENV STAGE local
