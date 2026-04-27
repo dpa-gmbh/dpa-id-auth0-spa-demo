@@ -52,6 +52,6 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY_DPA_ID }}
           aws-region: eu-central-1
       - working-directory: ./infrastructure
-        run: npm clean-install
+        run: pnpm install --frozen-lockfile
       - working-directory: ./infrastructure
-        run: npm run cdk deploy -- --require-approval=never dpa-id-auth0-spa-demo-master
+        run: pnpm run cdk deploy --require-approval=never dpa-id-auth0-spa-demo-master
