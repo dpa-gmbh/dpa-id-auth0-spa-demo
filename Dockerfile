@@ -1,9 +1,11 @@
-FROM node:24.15.0-alpine as build
+FROM node:24.15.0-alpine AS build
 WORKDIR /usr/src/app
-COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
-RUN pnpm install --frozen-lockfile
-COPY . ./
 
+# Install pnpm
+RUN npm install --global pnpm
+
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
+COPY . ./
 
 ARG VITE_AUTH0_CLIENT_ID
 ENV VITE_AUTH0_CLIENT_ID=$VITE_AUTH0_CLIENT_ID
@@ -14,7 +16,7 @@ ENV VITE_AUTH0_DOMAIN=$VITE_AUTH0_DOMAIN
 RUN pnpm run build
 
 FROM public.ecr.aws/nginx/nginx:stable-alpine
-ENV STAGE local
+ENV STAGE=local
 
 #
 # Install jq
